@@ -32,8 +32,10 @@ class Trie{
                     break;
                 }
             }
-            if(!foundLetter)
-                nav.edges.put(word.charAt(i), new Node(currentWord));
+            if(!foundLetter){
+                nav.edges.put(word.charAt(i), new Node(word));
+                return;
+            }
         }
     }
 
