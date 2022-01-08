@@ -1,5 +1,4 @@
 package com.zdhcode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -20,11 +19,10 @@ class Trie{
 
     public void insert(String word){
         Node nav = root;
-        int i;
         String currentWord = "";
         boolean foundLetter;
 
-        for(i = 0; i < word.length(); i++){
+        for(int i = 0; i < word.length(); i++){
             foundLetter = false;
             currentWord = currentWord.concat(Character.toString(word.charAt(i)));
             for(Map.Entry<Character,Node> e : nav.edges.entrySet()) {
@@ -34,10 +32,8 @@ class Trie{
                     break;
                 }
             }
-            if(!foundLetter) {
+            if(!foundLetter)
                 nav.edges.put(word.charAt(i), new Node(currentWord));
-                System.out.println("Inserted: " + currentWord);
-            }
         }
     }
 
@@ -91,19 +87,20 @@ class Trie{
 public class Main {
 
     public static void main(String[] args) {
-        Trie t = new Trie();
+        Trie trie = new Trie();
 
-        t.insert("t");
-        t.insert("A");
-        t.insert("i");
-        t.insert("in");
-        t.insert("inn");
-        t.insert("to");
-        t.insert("te");
-        t.insert("tea");
-        t.insert("ted");
-        t.insert("ten");
+        trie.insert("t");
+        trie.insert("A");
+        trie.insert("i");
+        trie.insert("in");
+        trie.insert("inn");
+        trie.insert("to");
+        trie.insert("te");
+        trie.insert("tea");
+        trie.insert("ted");
+        trie.insert("ten");
+        trie.insert("apple");
 
-        t.suggestions("a");
+        trie.suggestions("");
     }
 }
