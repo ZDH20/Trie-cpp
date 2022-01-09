@@ -20,26 +20,26 @@ public:
 
     void deleteAll(Node *n){
         if(n == nullptr) return;
-        for(auto child : n->children)
-            deleteAll(child.second);
+        for(std::map<char, Node*>::iterator it = n->children.begin(); it != n->children.end(); ++it)
+            deleteAll(it->second);
         delete n;
     }
 
     void insert(std::string word_){
         Node *curr = _root;
-        for(char c : word_){
-            if(curr->children.find(c) == curr->children.end())
-                curr->children[c] = new Node(word_);
-            curr = curr->children[c];
+        for(int i = 0; i < word_.length(); i++){
+            if(curr->children.find(word_[i]) == curr->children.end())
+                curr->children[word_[i]] = new Node(word_);
+            curr = curr->children[word_[i]];
         }
     }
 
     void suggestions(std::string word_){
         Node *curr = _root;
-        for(char c : word_){
-            if(curr->children.find(c) == curr->children.end())
+        for(int i = 0; i < word_.length(); i++){
+            if(curr->children.find(word_[i]) == curr->children.end())
                 return;
-            curr = curr->children[c];
+            curr = curr->children[word_[i]];
         }
         std::queue<Node*> q;
         q.push(curr);
@@ -48,8 +48,8 @@ public:
             q.pop();
             if(curr->children.size() == 0)
                 std::cout << curr->data << std::endl;
-            for(auto it : curr->children)
-                q.push(it.second);
+            for(std::map<char, Node*>::iterator it = curr->children.begin(); it != curr->children.end(); ++it)
+                q.push(it->second);
         } 
     }
 };
